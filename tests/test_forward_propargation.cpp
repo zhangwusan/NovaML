@@ -1,7 +1,8 @@
-#include "mldl/model.hpp"
-#include "mldl/layer.hpp"
-#include "mldl/activation.hpp"
-#include "mldl/factory.hpp"
+#include "mldl/core/tensor.hpp"
+#include "mldl/modules/sequential.hpp"
+#include "mldl/layers/dense.hpp"
+#include "mldl/layers/relu.hpp"
+#include <iostream>
 
 using namespace ml;
 
@@ -14,7 +15,7 @@ int main() {
 
     // Build Model
 
-    Model<double> model;
+    Sequential<double> model;
     model.add(std::make_shared<Dense<double>>(3, 4)); // 3 in features and 4 out features
     model.add(std::make_shared<ReLU<double>>());
     model.add(std::make_shared<Dense<double>>(4, 1));

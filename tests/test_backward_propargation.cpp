@@ -1,8 +1,7 @@
-#include "mldl/model.hpp"
-#include "mldl/layer.hpp"
-#include "mldl/activation.hpp"
-#include "mldl/factory.hpp"
-#include "mldl/loss.hpp"
+#include "mldl/modules/sequential.hpp"
+#include "mldl/layers/dense.hpp"
+#include "mldl/layers/relu.hpp"
+#include "mldl/losses/mse.hpp"
 #include <iostream>
 
 using namespace ml;
@@ -19,13 +18,13 @@ int main() {
     target[0] = 10.0;  // Example target
 
     // Build Model
-    Model<double> model;
+    Sequential<double> model;
     model.add(std::make_shared<Dense<double>>(3, 4));
     model.add(std::make_shared<ReLU<double>>());
     model.add(std::make_shared<Dense<double>>(4, 1));
     model.add(std::make_shared<ReLU<double>>());
 
-    std::cout << model;
+    std::cout << model << std::endl;
 
     // Define Loss
     MSELoss<double> loss_fn;
@@ -53,7 +52,9 @@ int main() {
 
     // Final prediction
     Tensor<double> final_output = model.forward(input);
-    std::cout << "Final output: " << final_output << "\n";
+
+    std::cout << final_output << std::endl;
+    std::cout << "Finished" << std::endl;
 
     return 0;
 }

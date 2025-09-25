@@ -13,12 +13,10 @@ namespace ml
         const T &operator[](size_t i) const { return data[i]; }
         size_t size() const { return data.size(); }
 
+        template<typename U> friend std::ostream &operator<<(std::ostream &os, const Tensor<U> &tensor);
+
     private:
         std::vector<T> data;
-
-        // Friend operator
-        template <typename U>
-        friend std::ostream &operator<<(std::ostream &os, const Tensor<U> &tensor);
     };
 }
 
