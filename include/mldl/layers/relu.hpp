@@ -29,4 +29,4 @@ namespace ml
 
 } // namespace ml
 
-#include "relu_impl.hpp"
+#include "relu_impl.tpp"

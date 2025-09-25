@@ -26,4 +26,4 @@ private:
 
 } // namespace ml
 
-#include "dense_impl.hpp"
+#include "dense_impl.tpp"

@@ -27,4 +27,4 @@ private:
 
 } // namespace ml
 
-#include "sigmoid_impl.hpp"
+#include "sigmoid_impl.tpp"
