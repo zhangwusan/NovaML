@@ -1,10 +1,10 @@
-# Makefile for DLML project
+# Makefile for NovaML project
 
 # Build directory
 BUILD_DIR := build
 
 # Executable name
-TARGET := DLML
+TARGET := NovaML
 
 # CMake generator
 CMAKE := cmake
