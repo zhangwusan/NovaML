@@ -124,11 +124,19 @@ namespace NovaML::Core
         std::string grad_fn_name = "";
     };
 
-    template <typename T>
-    std::shared_ptr<Tensor<T>> operator+(
-        const std::shared_ptr<Tensor<T>> &a,
-        const std::shared_ptr<Tensor<T>> &b)
-    {
-        return add(a, b);
-    }
+    // Friend operators
+    template <typename T> std::shared_ptr<Tensor<T>> operator+(const std::shared_ptr<Tensor<T>>& a, const std::shared_ptr<Tensor<T>>& b) { return add(a,b); }
+    template <typename T> std::shared_ptr<Tensor<T>> operator-(const std::shared_ptr<Tensor<T>>& a, const std::shared_ptr<Tensor<T>>& b) { return sub(a,b); }
+    template <typename T> std::shared_ptr<Tensor<T>> operator*(const std::shared_ptr<Tensor<T>>& a, const std::shared_ptr<Tensor<T>>& b) { return mul(a,b); }
+    template <typename T> std::shared_ptr<Tensor<T>> operator^(const std::shared_ptr<Tensor<T>>& a, T exponent) { return pow(a, exponent); }
+    template <typename T> std::shared_ptr<Tensor<T>> operator-(const std::shared_ptr<Tensor<T>>& a) { return neg(a); }
+
+    // Tensor-Scalar
+    template <typename T> std::shared_ptr<Tensor<T>> operator+(const std::shared_ptr<Tensor<T>>& a, T scalar) { return add_scalar(a, scalar); }
+    template <typename T> std::shared_ptr<Tensor<T>> operator+(T scalar, const std::shared_ptr<Tensor<T>>& a) { return add_scalar(a, scalar); }
+    template <typename T> std::shared_ptr<Tensor<T>> operator-(const std::shared_ptr<Tensor<T>>& a, T scalar) { return sub_scalar(a, scalar); }
+    template <typename T> std::shared_ptr<Tensor<T>> operator-(T scalar, const std::shared_ptr<Tensor<T>>& a) { return rsub_scalar(scalar, a);}
+    template <typename T> std::shared_ptr<Tensor<T>> operator*(const std::shared_ptr<Tensor<T>>& a, T scalar) { return mul_scalar(a, scalar); }
+    template <typename T> std::shared_ptr<Tensor<T>> operator*(T scalar, const std::shared_ptr<Tensor<T>>& a) { return rmul_scalar(scalar, a);}
+
 }
