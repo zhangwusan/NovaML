@@ -1,5 +1,4 @@
 #include "NovaML/core/tensor/tensor.hpp"
-#include "NovaML/core/tensor/tensor_ops.hpp"
 #include <iostream>
 
 using namespace NovaML::Core;
