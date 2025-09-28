@@ -1,14 +1,8 @@
-#pragma once
-#include "mldl/tensor.hpp"
-#include "mldl/layer.hpp"
-#include <vector>
-#include <string>
-#include <random>
-#include <algorithm>
+#include "dense.hpp"
 
-namespace ml
+namespace NovaML::Core::LayerModule
 {
-    // implement constructor
+
     template <typename T>
     Dense<T>::Dense(size_t in_features, size_t out_features)
         : weights(out_features, std::vector<T>(in_features)),
@@ -25,12 +19,11 @@ namespace ml
                 w = dist(gen);
     }
 
-    // implement Forward
     template <typename T>
-    Tensor<T> Dense<T>::forward(const Tensor<T> &input)
+    NovaML::Core::TensorModule::Tensor<T> Dense<T>::forward(const NovaML::Core::TensorModule::Tensor<T> &input)
     {
-        last_input = input; // store for backprop
-        Tensor<T> output(weights.size());
+        last_input = input;
+        NovaML::Core::TensorModule::Tensor<T> output(weights.size());
 
         for (size_t i = 0; i < weights.size(); ++i)
         {
@@ -44,14 +37,9 @@ namespace ml
     }
 
     template <typename T>
-    Tensor<T> Dense<T>::backward(const Tensor<T> &grad_output)
+    NovaML::Core::TensorModule::Tensor<T> Dense<T>::backward(const NovaML::Core::TensorModule::Tensor<T> &grad_output)
     {
-        Tensor<T> grad_input(last_input.size());
-
-        // Reset gradients
-        for (auto &row : grad_weights)
-            std::fill(row.begin(), row.end(), T(0));
-        std::fill(grad_bias.begin(), grad_bias.end(), T(0));
+        NovaML::Core::TensorModule::Tensor<T> grad_input(last_input.size());
 
         for (size_t i = 0; i < weights.size(); ++i)
         {
@@ -78,9 +66,9 @@ namespace ml
     }
 
     template <typename T>
-    std::string Dense<T>::get_info() const
+    std::string Dense<T>::info(std::ostream &os) const
     {
-        return "Dense(" + std::to_string(weights[0].size()) + " -> " + std::to_string(weights.size()) + ")";
+        return "Dense(" + std::to_string(weights[0].size()) + "->" + std::to_string(weights.size()) + ")";
     }
 
     template <typename T>
